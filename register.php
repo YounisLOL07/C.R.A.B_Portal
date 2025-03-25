@@ -27,11 +27,15 @@
     <h1>Sign In</h1>
     <div class="input">
         <h3>Email:</h3>
-        <input type="text" placeholder = "Write your email" required>
+        <input type="email" placeholder = "Write your email" required>
 
         <h3>Password:</h3>
         <input type="password" placeholder = "Write your password" required>
-        <p>Don't have an account? <a href="register.php">Then click here!</a></p>
+
+        <h3>Confirm Password:</h3>
+        <input type="password" placeholder = "Confirm your password" required>
+
+        <p>You have an account already? <a href="sign_in.php">Then click here!</a></p>
         <button>Submit</button>
     </div>
     
