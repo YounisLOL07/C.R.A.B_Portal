@@ -17,11 +17,15 @@ body {
     text-decoration: none;
     color:white;
     transition-duration: 0.2s;
-    font-size:20px;
+    font-size:15px;
 }
 
 .navbar a:hover {
     color:red;
     
+}
+.container h3 {
+    display:flex;
+    justify-content:center;
 }
 

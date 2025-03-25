@@ -9,13 +9,20 @@
 <body>
     <div class="container">
         <div class="navbar">
-            <a href="">Home</a>
-            <a href="">Highscore</a>
-            <a href="">FAQ</a>
+            <a href="index.php">Home</a>
+            <a href="sign_in.php">Sign In</a>
+            <a href="highscore.php">Highscore</a>
+            <a href="FAQ.php">FAQ</a>
+        </div>
+
+        <h3>This is the Crab Portal!</h3>
+
+        <div class="games">
+            <div class="clicker_game">
+
+            </div>
         </div>
         
-        <h1>This is the Crab Portal!</h1>
-        <h2>Here are all the games!</h2>
     </div>
 </body>
 </html>
