@@ -18,10 +18,17 @@
         <h3>This is the Crab Portal!</h3>
 
         <div class="games">
-            <div class="clicker_game">
-
+            <div class="clicker_game_card">
+                <img src="" alt="">
+                <h4>Clicker Game</h4>
+                <a href="clicker_game.php">Click to play</a>
             </div>
+
         </div>
+
+        <!-- <div class="footer">
+            C.R.A.B Game. All rights reserved
+        </div> -->
         
     </div>
 </body>
