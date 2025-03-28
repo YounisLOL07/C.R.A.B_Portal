@@ -26,6 +26,9 @@
     </div>
     <h1>Sign In</h1>
     <div class="input">
+        <h3>Username: </h3>
+        <input type="email" placeholder = "Write your email" required>
+
         <h3>Email:</h3>
         <input type="email" placeholder = "Write your email" required>
 

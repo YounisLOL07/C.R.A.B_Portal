@@ -22,7 +22,6 @@
                 <button id="clickButton">Click me</button>
                 <button id="startOverButton">Start over</button>
                 <button id="ten">10X</button>
-
                 <p>Button clicked: <span id="clickCount">0</span> times</p>
 
             </div>

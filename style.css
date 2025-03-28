@@ -24,6 +24,7 @@ body {
     color:red;
     
 }
+
 .games {
     display: flex;
     justify-content: center;
@@ -65,26 +66,7 @@ body {
     justify-content:center;
 }
 
-.games {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap:20px;
-}
 
-.clickerGame {
-    display: flex;
-    justify-content: center;
-}
-
-#clickButton{
-    display: flex;
-    justify-content: center;
-}
-
-#ten {
-    display:flex;
-}
 /* .footer {
     display:flex;
     align-items: flex-end;
