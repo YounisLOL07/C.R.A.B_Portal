@@ -21,7 +21,7 @@
             <div class="clicker_game_card">
                 <img src="" alt="">
                 <h4>Clicker Game</h4>
-                <a href="clicker_game.php">Click play!</a>
+                <a href="clicker_game.php">Click play test for Paul!</a>
             </div>
 
         </div>
