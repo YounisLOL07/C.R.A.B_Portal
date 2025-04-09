@@ -24,6 +24,11 @@
                 <button id="ten">10X</button>
                 <p>Button clicked: <span id="clickCount">0</span> times</p>
 
+                <input type="text" id="username" placeholder="Enter your name">
+                <button id="submitScoreButton">Submit Score</button>
+                <p id="submitStatus"></p>
+
+
             </div>
 
         </div>

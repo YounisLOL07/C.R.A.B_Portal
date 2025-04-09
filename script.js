@@ -35,3 +35,25 @@ startOver.addEventListener("click", zeroPoint);
 tenXButton.addEventListener("click", tenTimesButton);
 
 
+var submitButton = document.getElementById("submitScoreButton");
+
+submitButton.addEventListener("click", function () {
+    var username = document.getElementById("username").value;
+
+    if (username.trim() === "") {
+        document.getElementById("submitStatus").textContent = "Please enter your name!";
+        return;
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "submit_score.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.onload = function () {
+        document.getElementById("submitStatus").textContent = xhr.responseText;
+    };
+
+    xhr.send("username=" + encodeURIComponent(username) + "&score=" + clickCount);
+});
+
+

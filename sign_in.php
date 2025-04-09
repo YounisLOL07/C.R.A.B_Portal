@@ -1,3 +1,52 @@
+<?php
+session_start();
+
+$servername = "10.2.2.195";
+$username = "younis_admin";
+$password = "admin123";
+$dbname = "crab_game";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$login_error = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+    $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->store_result();
+
+    // Check if user exists
+    if ($stmt->num_rows == 1) {
+        $stmt->bind_result($db_password);
+        $stmt->fetch();
+
+        // Basic password check (no hashing)
+        if ($password === $db_password) {
+            $_SESSION['username'] = $username;
+            // header("Location: in.php"); // Redirect on success
+            echo("Successful login account");
+            exit();
+        } else {
+            $login_error = "Invalid password.";
+        }
+    } else {
+        $login_error = "User not found.";
+    }
+
+    $stmt->close();
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +64,11 @@
         .input {
             margin:10px;
         }
+        .left-space {
+            margin-left:20px;
+        }
+
+
     </style>
 </head>
 <body>
@@ -25,15 +79,22 @@
         <a href="FAQ.php">FAQ</a>
     </div>
     <h1>Sign In</h1>
-    <div class="input">
-        <h3>Email:</h3>
-        <input type="text" placeholder = "Write your email" required>
+    <div class="left-space">
+    <h2>Login to C.R.A.B Portal</h2>
+    <?php if ($login_error): ?>
+        <p class="error"><?php echo $login_error; ?></p>
+    <?php endif; ?>
 
-        <h3>Password:</h3>
-        <input type="password" placeholder = "Write your password" required>
-        <p>Don't have an account? <a href="register.php">Then click here!</a></p>
-        <button>Submit</button>
-    </div>
+
+            <form method="POST" action="">
+                <input type="text" name="username" placeholder="Username" required />
+                <br><br>
+                <input type="password" name="password" placeholder="Password" required />
+                <br><br>
+                <input type="submit" value="Login" />
+                <p>Wait, you don't have an account? <a href="register.php">Click here to make one!</a></p>
+            </form>
+        </div>
     
 
 </body>
