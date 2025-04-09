@@ -13,7 +13,6 @@ if ($conn->connect_error) {
 }
 
 $login_error = '';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
@@ -31,8 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Basic password check (no hashing)
         if ($password === $db_password) {
             $_SESSION['username'] = $username;
-            // header("Location: in.php"); // Redirect on success
-            echo("Successful login account");
+            header("Location: index.php"); // Redirect on success
             exit();
         } else {
             $login_error = "Invalid password.";
@@ -42,6 +40,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $stmt->close();
+}
+
+if (isset($_SESSION['username'])) {
+    // If logged in, redirect them to the index page
+    header("Location: index.php");
+    exit();
 }
 
 $conn->close();
@@ -74,7 +78,12 @@ $conn->close();
 <body>
     <div class="navbar">
         <a href="index.php">Home</a>
-        <a href="sign_in.php">Sign In</a>
+        <?php if (isset($_SESSION['username'])): ?>
+            <span class="logged-in">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+            <a href="logout.php">Logout</a>
+        <?php else: ?>
+            <a href="sign_in.php">Sign In</a>
+        <?php endif; ?>
         <a href="highscore.php">Highscore</a>
         <a href="FAQ.php">FAQ</a>
     </div>

@@ -99,7 +99,12 @@ $conn->close();
 <body>
     <div class="navbar">
         <a href="index.php">Home</a>
-        <a href="sign_in.php">Sign In</a>
+        <?php if (isset($_SESSION['username'])): ?>
+            <span class="logged-in">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+            <a href="logout.php">Logout</a>
+        <?php else: ?>
+            <a href="sign_in.php">Sign In</a>
+        <?php endif; ?>
         <a href="highscore.php">Highscore</a>
         <a href="FAQ.php">FAQ</a>
     </div>
