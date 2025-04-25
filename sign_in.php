@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$servername = "192.168.68.100";
+$servername = "10.2.2.100";
 $username = "younis_admin";
 $password = "admin123";
 $dbname = "crab_game";
