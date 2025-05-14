@@ -7,15 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>C.R.A.B Portal</title>
-    <style>
-        
-        .logged-in {
-            color:white;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
+   <div class="container">
         <div class="navbar">
             <a href="index.php">Home</a>
             <?php if (isset($_SESSION['username'])): ?>
@@ -46,4 +40,4 @@
         
     </div>
 </body>
-</html>
+</html> 

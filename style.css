@@ -66,6 +66,14 @@ body {
     justify-content:center;
 }
 
+.highscore-table {
+    margin-left:15px;
+}
+
+.logged-in {
+    color:white;
+}
+
 
 
 /* .footer {

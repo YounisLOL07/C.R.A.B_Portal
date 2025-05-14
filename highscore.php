@@ -1,12 +1,34 @@
-<?php session_start(); ?>
+<?php
+session_start();
+
+// Koble til databasen
+$servername = "10.2.2.100";
+$username = "younis_admin";
+$password = "admin123";
+$dbname = "crab_game";
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$servername;dbname=$dbname;charset=$charset";
+$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+
+try {
+    $pdo = new PDO($dsn, $username, $password, $options);
+} catch (PDOException $e) {
+    die("DB connection failed: " . $e->getMessage());
+}
+
+// Hent highscores
+$stmt = $pdo->query("SELECT player, score FROM highscore ORDER BY score DESC");
+$highscores = $stmt->fetchAll();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highscores</title>
     <link rel="stylesheet" href="style.css">
-    <title>Highscore</title>
+    
 </head>
 <body>
     <div class="container">
@@ -21,8 +43,23 @@
             <a href="highscore.php">Highscore</a>
             <a href="FAQ.php">FAQ</a>
         </div>
+                <div class="highscore-table">
+            <h2>Highscores</h2>
+            <table>
+                <tr>
+                    <th>Player</th>
+                    <th>Score</th>
+                </tr>
+                <?php foreach ($highscores as $row): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row['player']) ?></td>
+                        <td><?= $row['score'] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
     </div>
+    
 
-    <h1>This is Highscore!</h1>
 </body>
 </html>
