@@ -19,7 +19,7 @@
                 <a href="sign_in.php">Sign In</a>
             <?php endif; ?>
             <a href="highscore.php">Highscore</a>
-            <a href="FAQ.php">FAQ asdfsadf</a>
+            <a href="FAQ.php">FAQ</a>
         </div>
 
         <h3>This is the Crab Portal!</h3>
