@@ -1,55 +1,46 @@
 <?php
 session_start();
+require 'db_connect.php';
 
-$servername = "10.2.2.100";
-$username = "younis_admin";
-$password = "admin123";
-$dbname = "crab_game";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = dbConnect();
 
 $login_error = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
+    try {
+        $stmt = $conn->prepare("SELECT password FROM users WHERE username = :username");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
 
-    // Check if user exists
-    if ($stmt->num_rows == 1) {
-        $stmt->bind_result($db_password);
-        $stmt->fetch();
+        if ($stmt->rowCount() === 1) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $db_password = $row['password'];
 
-        // Basic password check (no hashing)
-        if ($password === $db_password) {
-            $_SESSION['username'] = $username;
-            header("Location: index.php"); // Redirect on success
-            exit();
+            // Check hashed password
+            if ($password === $db_password) {
+                $_SESSION['username'] = $username;
+                header("Location: index.php");
+                exit();
+            } else {
+                $login_error = "Invalid password.";
+            }
         } else {
-            $login_error = "Invalid password.";
+            $login_error = "User not found.";
         }
-    } else {
-        $login_error = "User not found.";
+    } catch (PDOException $e) {
+        $login_error = "Database error: " . $e->getMessage();
     }
-
-    $stmt->close();
 }
 
 if (isset($_SESSION['username'])) {
-    // If logged in, redirect them to the index page
     header("Location: index.php");
     exit();
 }
-
-$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

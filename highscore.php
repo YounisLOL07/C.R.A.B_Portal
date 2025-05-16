@@ -1,24 +1,12 @@
 <?php
 session_start();
 
-// Koble til databasen
-$servername = "10.2.2.100";
-$username = "younis_admin";
-$password = "admin123";
-$dbname = "crab_game";
-$charset = 'utf8mb4';
+require 'db_connect.php';
 
-$dsn = "mysql:host=$servername;dbname=$dbname;charset=$charset";
-$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-
-try {
-    $pdo = new PDO($dsn, $username, $password, $options);
-} catch (PDOException $e) {
-    die("DB connection failed: " . $e->getMessage());
-}
+$conn = dbConnect();
 
 // Hent highscores
-$stmt = $pdo->query("SELECT player, score FROM highscore ORDER BY score DESC");
+$stmt = $conn->query("SELECT player, score FROM highscore ORDER BY score DESC");
 $highscores = $stmt->fetchAll();
 ?>
 

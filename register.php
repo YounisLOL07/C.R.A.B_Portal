@@ -1,16 +1,8 @@
 <?php
 session_start();
 
-$servername = "10.2.2.100";
-$username = "younis_admin";
-$password = "admin123";
-$dbname = "crab_game";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require 'db_connect.php';
+$conn = dbConnect(); // Make sure this returns a PDO instance
 
 $register_error = '';
 $register_success = '';
@@ -20,56 +12,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_password = trim($_POST['password']);
     $new_email = trim($_POST['email']);
 
-    // Check if username already exists
-    $check_stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
-    $check_stmt->bind_param("s", $new_username);
-    $check_stmt->execute();
-    $check_stmt->store_result();
+    try {
+        // Check if username exists
+        $stmt = $conn->prepare("SELECT id FROM users WHERE username = :username");
+        $stmt->bindParam(':username', $new_username);
+        $stmt->execute();
 
-    if ($check_stmt->num_rows > 0) {
-        $register_error = "Username already taken.";
-    } else {
-        // Insert new user
-        $insert_stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
-        $insert_stmt->bind_param("sss", $new_username, $new_password, $new_email);
-
-        if ($insert_stmt->execute()) {
-            $register_success = "Registration successful! You can now <a href='sign_in.php'>log in</a>.";
+        if ($stmt->rowCount() > 0) {
+            $register_error = "Username already taken.";
         } else {
-            $register_error = "Something went wrong. Please try again.";
+            // Check if email exists
+            $stmt = $conn->prepare("SELECT id FROM users WHERE email = :email");
+            $stmt->bindParam(':email', $new_email);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                $register_error = "Email already in use.";
+            } else {
+                // Insert new user
+                $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)");
+                $stmt->bindParam(':username', $new_username);
+                $stmt->bindParam(':password', $new_password); // You should hash this!
+                $stmt->bindParam(':email', $new_email);
+
+                if ($stmt->execute()) {
+                    $register_success = "Registration successful! You can now <a href='sign_in.php'>log in</a>.";
+                } else {
+                    $register_error = "Something went wrong. Please try again.";
+                }
+            }
         }
-
-        $insert_stmt->close();
+    } catch (PDOException $e) {
+        $register_error = "Database error: " . $e->getMessage();
     }
-
-
-    $check_stmt->close();
-
-    $check_email_stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
-    $check_email_stmt->bind_param("s", $new_email);
-    $check_email_stmt->execute();
-    $check_email_stmt->store_result();
-
-    if ($check_email_stmt->num_rows > 0) {
-        $register_error = "Email already in use.";
-    } else {
-        // Insert new user
-        $insert_stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
-        $insert_stmt->bind_param("sss", $new_username, $new_password, $new_email);
-
-        if ($insert_stmt->execute()) {
-            $register_success = "Registration successful! You can now <a href='sign_in.php'>log in</a>.";
-        } else {
-            $register_error = "Something went wrong. Please try again.";
-        }
-
-        $insert_stmt->close();
-    }
-    $check_email_stmt->close();
 }
-
-$conn->close();
 ?>
+
 
 
 <!DOCTYPE html>
