@@ -1,83 +1,70 @@
-# C.R.A.B_Portal
+# C.R.A.B Portal - Clicker Game
 
-Welcome to the **C.R.A.B_Portal** repository! This project is a web-based portal developed using PHP, JavaScript, and CSS, designed to provide an interactive user experience.
+Dette er et enkelt nettspill kalt **Clicker Game**, utviklet med PHP, HTML, CSS og JavaScript. Spillet lar brukere klikke for å øke poengsum, lagre resultatet i en database, og vise en highscore-liste. 
 
-## 🚀 Features
+## Innhold i prosjektet
 
-- **User Authentication**: Secure sign-in and registration system.
-- **Interactive Game**: A clicker game to engage users.
-- **Highscore Tracking**: Maintains a leaderboard of top scores.
-- **FAQ Section**: Answers to common questions.
-- **Responsive Design**: Ensures usability across devices.
+- **index.php** – Portalens startside med lenke til clicker-spillet.
+- **clicker_game.php** – Selve clicker-spillet med poengtelling og innsending av score.
+- **highscore.php** – Viser highscore-tabell med spillernes poeng.
+- **faq.php** – Enkel FAQ-side.
+- **register.php** – Registreringsside for nye brukere.
+- **sign_in.php** – Påloggingsside.
+- **logout.php** – Logger ut brukeren.
+- **submit_score.php** – Skript for å lagre score i databasen.
+- **style.css** – Stylesheet for hele portalen (ikke vist her).
 
-## 🛠️ Technologies Used
+## Database
 
-- **PHP**: Server-side scripting.
-- **JavaScript**: Client-side interactivity.
-- **CSS**: Styling and layout.
-- **HTML**: Markup language for web pages.
+Prosjektet bruker en MySQL/MariaDB database med navn `crab_game` som hostes på en Ubuntu VM i Hyper-V.
 
-## 📁 Project Structure
+### Tabellen `users`
 
-```
-├── .gitignore
-├── FAQ.php
-├── README.md
-├── clicker_game.php
-├── highscore.php
-├── index.php
-├── logout.php
-├── register.php
-├── script.js
-├── sign_in.php
-└── style.css
-```
+- `id` (int, auto_increment, primary key)
+- `username` (varchar)
+- `password` (varchar) – OBS: passord er foreløpig ikke hashet.
+- `email` (varchar)
 
-## 🔧 Installation
+### Tabellen `highscore`
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/YounisLOL07/C.R.A.B_Portal.git
-   ```
+- `id` (int, auto_increment, primary key)
+- `player` (varchar)
+- `score` (int)
 
-2. **Navigate to the Project Directory**:
-   ```bash
-   cd C.R.A.B_Portal
-   ```
+## Hosting og tilkobling
 
-3. **Set Up a Local Server**:
-   - Use tools like XAMPP or WAMP to run the PHP files.
-   - Place the project folder in the server's root directory (e.g., `htdocs` for XAMPP).
+- VM med Ubuntu OS kjører database-server.
+- IP hjemme: `192.168.4.95`
+- IP skole: `10.2.2.100`
+- Tilgang via SSH for administrasjon.
 
-4. **Access the Application**:
-   - Open a web browser and navigate to `http://localhost/C.R.A.B_Portal/index.php`.
+## Hvordan bruke
 
-## 🧪 Usage
+1. Pakk hele mappen `C.R.A.B_Portal` inn i webserverens rotmappe (f.eks. `/var/www/html`).
+2. Konfigurer `db_connect.php` med riktig database-tilkobling.
+3. Åpne `index.php` i nettleseren for å starte.
+4. Registrer ny bruker eller logg inn.
+5. Spill Clicker Game, klikk for poeng, og send inn score.
+6. Se highscore-listen under "Highscore" i menyen.
 
-- **Register**: Create a new account via the registration page.
-- **Login**: Access your account using the sign-in page.
-- **Play**: Engage with the clicker game and aim for high scores.
-- **View Scores**: Check out the leaderboard to see top performers.
-- **FAQ**: Visit the FAQ section for assistance.
 
-## ❓ FAQ
+## FAQ
 
-### Q1: How do I reset my password?
-**A**: Currently, password reset functionality is not implemented. Please contact the administrator for assistance.
+**Hvordan registrerer jeg meg?**  
+Gå til `register.php` og fyll ut brukernavn, e-post og passord. Passord må være minst 8 tegn.
 
-### Q2: Why isn't my score updating?
-**A**: Ensure that you are logged in and have a stable internet connection. If the issue persists, try refreshing the page.
+**Hvordan logger jeg inn?**  
+Bruk `sign_in.php` og skriv inn brukernavn og passord.
 
-### Q3: Can I play the game without registering?
-**A**: Registration is required to track scores and access all features.
+**Hvordan fungerer Clicker Game?**  
+Du klikker på knappen "Click me!" for å øke poengsummen. Når du er ferdig, kan du skrive inn navnet ditt og sende inn poengsummen til highscore-listen.
 
-### Q4: How can I contribute to this project?
-**A**: Feel free to fork the repository, make your changes, and submit a pull request.
+**Hvor lagres poengene?**  
+Poengene lagres i databasen i tabellen `highscore` sammen med navnet du oppgir.
 
-## 📬 Contact
-
-For further questions or feedback, please open an issue on the [GitHub repository](https://github.com/YounisLOL07/C.R.A.B_Portal/issues).
+**Hva skjer hvis jeg logger ut?**  
+Sessionen din slettes og du må logge inn igjen for å få tilgang til brukerfunksjoner.
 
 ---
 
-*This README was generated to provide a comprehensive overview of the C.R.A.B_Portal project.*
+**C.R.A.B Portal** – enkel portal med spill og brukerstøtte laget som skoleprosjekt.
