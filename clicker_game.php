@@ -55,16 +55,19 @@
         const countDisplay = document.getElementById('clickCount');
         const scoreInput = document.getElementById('scoreInput');
 
-        clickBtn.addEventListener('click', () => {
-            count++;
+        function updateDisplay() {
             countDisplay.textContent = count;
             scoreInput.value = count;
+        }
+
+        clickBtn.addEventListener('click', () => {
+            count++;
+            updateDisplay();
         });
 
         resetBtn.addEventListener('click', () => {
             count = 0;
-            countDisplay.textContent = count;
-            scoreInput.value = count;
+            updateDisplay();
         });
     </script>
 </body>

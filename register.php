@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Insert new user
                 $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)");
                 $stmt->bindParam(':username', $new_username);
-                $stmt->bindParam(':password', $new_password); // You should hash this!
+                $stmt->bindParam(':password', $new_password); //Jeg skal hashe passordet senere.
                 $stmt->bindParam(':email', $new_email);
 
                 if ($stmt->execute()) {
