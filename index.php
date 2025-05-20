@@ -11,7 +11,7 @@
 <body>
    <div class="container">
         <div class="navbar">
-            <a href="index.php">Home</a>
+            <a href="index.php">Home testing 123</a>
             <?php if (isset($_SESSION['username'])): ?>
                 <span class="logged-in">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
                 <a href="logout.php">Logout</a>
