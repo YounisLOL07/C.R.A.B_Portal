@@ -89,7 +89,7 @@ if (isset($_SESSION['username'])) {
             <form method="POST" action="">
                 <input type="text" name="username" placeholder="Username" required />
                 <br><br>
-                <input type="password" name="password" placeholder="Password" required/>
+                <input type="password" name="password" placeholder="Password" required />
                 <br><br>
                 <input type="submit" value="Login" />
                 <p>Wait, you don't have an account? <a href="register.php">Click here to make one!</a></p>
