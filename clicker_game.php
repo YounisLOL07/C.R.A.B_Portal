@@ -31,20 +31,7 @@
                 <input type="hidden" name="score" id="scoreInput">
                 <input type="text" name="player" placeholder="Enter your name" required>
                 <button type="submit">Submit Score</button>
-                <p id="statusMessage" style="color: green;">
-                    <?php if (isset($_GET['submitted'])): ?>
-                        You have submitted the score!
-                    <?php endif; ?>
-                </p>
             </form>
-
-            <p id="statusMessage">
-                <?php
-                if (isset($_GET['submitted'])) {
-                    echo "Score submitted!";
-                }
-                ?>
-            </p>
         </div>
     </div>
 

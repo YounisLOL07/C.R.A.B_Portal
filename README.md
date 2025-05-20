@@ -68,3 +68,5 @@ Sessionen din slettes og du må logge inn igjen for å få tilgang til brukerfun
 ---
 
 **C.R.A.B Portal** – enkel portal med spill og brukerstøtte laget som skoleprosjekt.
+
+**Kontakt** – Email meg på khelyounis123@gmail.com for spørsmål om nettsiden eller mulige ting å fikse med nettsiden!
