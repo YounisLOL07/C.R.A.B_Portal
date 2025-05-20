@@ -33,11 +33,10 @@
             </div>
 
         </div>
+    </div>
 
-        <!-- <div class="footer">
-            C.R.A.B Game. All rights reserved
-        </div> -->
-        
+    <div class="footer">
+        <p> Copyright © C.R.A.B Portal. All rights reserved.</p>
     </div>
 </body>
 </html> 

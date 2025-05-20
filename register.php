@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br><br>
             <input type="email" name="email" placeholder="Your email address" required />
             <br><br>
-            <input type="password" name="password" placeholder="Choose a password" required minlength="8"/>
+            <input type="password" name="password" placeholder="Choose a password" required />
             <br><br>
             <input type="submit" value="Register" />
             <p>Already have an account? <a href="sign_in.php">Log in here</a></p>
