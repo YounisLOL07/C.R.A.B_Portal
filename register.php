@@ -29,17 +29,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->rowCount() > 0) {
                 $register_error = "Email already in use.";
             } else {
-                // Insert new user
-                $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)");
-                $stmt->bindParam(':username', $new_username);
-                $stmt->bindParam(':password', $new_password); //Jeg skal hashe passordet senere.
-                $stmt->bindParam(':email', $new_email);
-
-                if ($stmt->execute()) {
-                    $register_success = "Registration successful! You can now <a href='sign_in.php'>log in</a>.";
+                if ($_POST["password"] !== $_POST["confirm_password"]) {
+                    $register_error = "You didn't confirm your password!!";
                 } else {
-                    $register_error = "Something went wrong. Please try again.";
+                    // Insert new user
+                    $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)");
+                    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+                    $stmt->bindParam(':username', $new_username);
+                    $stmt->bindParam(':password', $hashed_password); //Jeg skal hashe passordet senere.
+                    $stmt->bindParam(':email', $new_email);
+
+                    if ($stmt->execute()) {
+                        $register_success = "Registration successful! You can now <a href='sign_in.php'>log in</a>.";
+                    } else {
+                        $register_error = "Something went wrong. Please try again.";
+                    }
                 }
+                
             }
         }
     } catch (PDOException $e) {
@@ -103,7 +109,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br><br>
             <input type="email" name="email" placeholder="Your email address" required />
             <br><br>
-            <input type="password" name="password" placeholder="Choose a password" required />
+            <input type="password" name="password" placeholder="Choose a password" required minlength="8"/>
+            <br><br>
+            <input type="password" name="confirm_password" placeholder="Confirm your password" required/>
             <br><br>
             <input type="submit" value="Register" />
             <p>Already have an account? <a href="sign_in.php">Log in here</a></p>

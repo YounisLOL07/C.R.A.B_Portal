@@ -35,7 +35,7 @@ Prosjektet bruker en MySQL/MariaDB database med navn `crab_game` som hostes på 
 
 - VM med Ubuntu OS kjører database-server.
 - IP hjemme: `192.168.4.95`
-- IP skole: `10.2.2.100`
+- IP skole: `10.2.3.101`
 - Tilgang via SSH for administrasjon.
 
 ## Hvordan bruke

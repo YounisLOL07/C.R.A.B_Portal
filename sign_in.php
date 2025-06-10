@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $db_password = $row['password'];
 
             // Check hashed password
-            if ($password === $db_password) {
+            if (password_verify($password, $db_password)) {
                 $_SESSION['username'] = $username;
                 header("Location: index.php");
                 exit();
