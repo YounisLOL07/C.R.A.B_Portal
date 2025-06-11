@@ -21,7 +21,6 @@ $highscores = $stmt->fetchAll();
 <body>
     <div class="container">
         <div class="navbar">
-            //navbar
             <a href="index.php">Home</a>
             <?php if (isset($_SESSION['username'])): ?>
                 <span class="logged-in">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
