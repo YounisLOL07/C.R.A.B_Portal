@@ -19,7 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $db_password = $row['password'];
 
-            // Check hashed password
             if (password_verify($password, $db_password)) {
                 $_SESSION['username'] = $username;
                 header("Location: index.php");
@@ -49,22 +48,6 @@ if (isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Sign In</title>
-    <style>
-        h1{
-            display:flex;
-            justify-content:center;
-            font-family: century-gothic, sans-serif;
-        }
-        
-        .input {
-            margin:10px;
-        }
-        .left-space {
-            margin-left:20px;
-        }
-
-
-    </style>
 </head>
 <body>
     <div class="navbar">

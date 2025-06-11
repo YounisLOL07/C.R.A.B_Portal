@@ -2,7 +2,7 @@
 session_start();
 
 require 'db_connect.php';
-$conn = dbConnect(); // Make sure this returns a PDO instance
+$conn = dbConnect(); 
 
 $register_error = '';
 $register_success = '';
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_email = trim($_POST['email']);
 
     try {
-        // Check if username exists
+        // Hvis brukernavn finnes
         $stmt = $conn->prepare("SELECT id FROM users WHERE username = :username");
         $stmt->bindParam(':username', $new_username);
         $stmt->execute();
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->rowCount() > 0) {
             $register_error = "Username already taken.";
         } else {
-            // Check if email exists
+            // Hvis e-post finnes
             $stmt = $conn->prepare("SELECT id FROM users WHERE email = :email");
             $stmt->bindParam(':email', $new_email);
             $stmt->execute();
@@ -32,11 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($_POST["password"] !== $_POST["confirm_password"]) {
                     $register_error = "You didn't confirm your password!!";
                 } else {
-                    // Insert new user
+                    // Legg til ny bruker
                     $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)");
                     $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
                     $stmt->bindParam(':username', $new_username);
-                    $stmt->bindParam(':password', $hashed_password); //Jeg skal hashe passordet senere.
+                    $stmt->bindParam(':password', $hashed_password); 
                     $stmt->bindParam(':email', $new_email);
 
                     if ($stmt->execute()) {
@@ -63,22 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Sign In</title>
-    <style>
-        h1{
-            display:flex;
-            justify-content:center;
-            font-family: century-gothic, sans-serif;
-        }
-        
-        .input {
-            margin:10px;
-        }
 
-
-        .left-space {
-            margin-left:20px;
-        }
-    </style>
 </head>
 <body>
     <div class="navbar">

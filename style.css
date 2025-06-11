@@ -4,6 +4,21 @@ body {
     font-family: century-gothic, sans-serif;
 }
 
+
+h1{
+    display:flex;
+    justify-content:center;
+    font-family: century-gothic, sans-serif;
+}
+        
+.input {
+    margin:10px;
+}
+
+.left-space {
+    margin-left:20px;
+}
+
 .navbar {
     display:flex;
     justify-content: space-evenly;
