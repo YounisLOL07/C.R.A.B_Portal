@@ -215,3 +215,8 @@ form input[type="submit"]:hover {
 .success {
     color: green;
 }
+
+/* 10x knapp */
+#tenXbutton {
+    display:hidden;
+}

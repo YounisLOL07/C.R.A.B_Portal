@@ -26,6 +26,7 @@
             <p>Score: <span id="clickCount">0</span></p>
             <button id="clickButton">Click me!</button>
             <button id="resetButton">Reset</button>
+            <button id="tenXbutton">10X</button>
 
             <form id="scoreForm" method="POST" action="submit_score.php">
                 <input type="hidden" name="score" id="scoreInput">
@@ -38,6 +39,7 @@
     <script>
         let count = 0;
         const clickBtn = document.getElementById('clickButton');
+        const tenBtn = document.getElementById('tenXbutton');
         const resetBtn = document.getElementById('resetButton');
         const countDisplay = document.getElementById('clickCount');
         const scoreInput = document.getElementById('scoreInput');
@@ -47,15 +49,36 @@
             scoreInput.value = count;
         }
 
+        function click() {
+            if (count > 10) {
+            tenBtn.style.display = "block";
+            } else {
+            // Hide the element
+            tenBtn.style.display = "none";
+            }
+        }
+
         clickBtn.addEventListener('click', () => {
             count++;
             updateDisplay();
+            click();
         });
 
         resetBtn.addEventListener('click', () => {
             count = 0;
             updateDisplay();
         });
+
+
+        // 10X button
+        tenBtn.addEventListener('click', () => {
+            count += 10;
+            updateDisplay();
+        });
+
+        click();
+        
+        
     </script>
 </body>
 </html>
